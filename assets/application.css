@@ -915,6 +915,10 @@ video {
   --tw-ring-opacity: 0.05;
 }
 
+.backdrop\:text-center::backdrop {
+  text-align: center;
+}
+
 .hover\:bg-blue-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(30 64 175 / var(--tw-bg-opacity));
