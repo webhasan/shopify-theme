@@ -3,27 +3,43 @@
     {% case block.type %}
       {% when 'article_title' %}
         <div class="flex items-center justify-center">
-            <div class="max-w-7xl backdrop:text-center">
-                <a href="{{ blog.url }}" class="mb-3 text-base uppercase text-gray-500 hover:text-gray-900 font-bold">{{ blog.title }}</a>
-                <h1 class="font-medium text-4xl">{{ article.title }}</h1>
-            </div>
+          <div class="max-w-7xl backdrop:text-center">
+            <a href="{{ blog.url }}" class="mb-3 text-base uppercase text-gray-500 hover:text-gray-900 font-bold">
+              {{- blog.title -}}
+            </a>
+            <h1 class="font-medium text-4xl">{{ article.title }}</h1>
+          </div>
+        </div>
+      {% when 'article_author' %}
+        <div class="flex items-center justify-center">
+          <div class="max-w-7xl text-center">
+            {% if section.settings.enable_author %}
+              <small>{{ article.author }}</small>
+            {% endif %}
+          </div>
         </div>
 
-      {% when 'article_author' %}
-        {% if section.settings.enable_author %}
-          <small>{{ article.author }}</small>
-        {% endif %}
-
       {% when 'article_publish_date' %}
-        {% if section.settings.enable_puslished_data %}
-          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
-            {{- article.published_at | date: '%Y-%m-%d' -}}
-          </time>
-        {% endif %}
-
+        <div class="flex items-center justify-center">
+            <div class="max-w-7xl text-center">
+                {% if section.settings.enable_puslished_data %}
+                    <time datetime="{{ article.published_at | date: format: 'on_date' }}">
+                      {{- article.published_at | date: '%Y-%m-%d' -}}
+                    </time>
+                {% endif %}
+            </div>
+        </div>
       {% when 'featured_image' %}
-        <img src="{{ article.image | image_url: width: 1000 }}" loading="lazy" width="1000" height="700">
+        <div class="max-w-7xl bg-blue-100 rounded-lg mx-2 overflow-hidden">
+            {% if article.image != blank %}
+                <img class="w-full h-80 md:h-96 object-cover object-center p-5" src="{{ article.image | image_url: width: 1000 }}" loading="lazy" width="1000" height="700">
+            {% else %}
+                {% assign placeholder_image = 'lifestyle-1' %}
+                {{ placeholder_image | placeholder_svg_tag: 'w-full h-80 md:h-96 object-cover object-center p-5' }}
+            {% endif %}
+        </div>
 
+       
       {% when 'article_content' %}
         <div>{{ article.content }}</div>
 
