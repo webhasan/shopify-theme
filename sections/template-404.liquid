@@ -1,0 +1,52 @@
+{% if section.settings['button-text'] == blank %}
+  {% assign button_text = 'Go Back To Home' %}
+{% else %}
+  {% assign button_text = section.settings['button-text'] %}
+{% endif %}
+
+{% if section.settings['button-link'] == blank %}
+  {% assign button_link = 'Go Back To Home' %}
+{% else %}
+  {% assign button_link = section.settings['button-link'] %}
+{% endif %}
+
+<h1 class="text-4xl font-bold mb-4">{{ section.settings.title }}</h1>
+<p>{{ section.settings['sub-text'] }}</p>
+<a
+  href="{{ button_link }}"
+  type="button"
+  class="mt-4 px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+>
+  {{- button_text -}}
+</a>
+
+{% schema %}
+{
+  "name": "404 Templage",
+  "class": "text-center h-screen flex flex-col items-center justify-center",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "404 ERROR",
+      "label": "404 Page Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "sub-text",
+      "default": "Not found what you are looking for",
+      "label": "404 page sub-text"
+    },
+    {
+      "type": "text",
+      "id": "button-text",
+      "label": "404 page button text"
+    },
+    {
+      "type": "text",
+      "id": "button-link",
+      "label": "404 page button link"
+    }
+  ]
+}
+{% endschema %}
