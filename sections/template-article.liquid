@@ -30,7 +30,7 @@
             </div>
         </div>
       {% when 'featured_image' %}
-        <div class="max-w-7xl bg-blue-100 rounded-lg mx-2 overflow-hidden">
+        <div class="max-w-7xl text-center bg-blue-100 rounded-lg mx-2 overflow-hidden">
             {% if article.image != blank %}
                 <img class="w-full h-80 md:h-96 object-cover object-center p-5" src="{{ article.image | image_url: width: 1000 }}" loading="lazy" width="1000" height="700">
             {% else %}
